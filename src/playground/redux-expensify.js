@@ -133,6 +133,12 @@ const getVisibileExpenses = (expenses, { text, sortBy, startDate, endDate}) => {
         const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
 
         return startDateMatch && endDateMatch && textMatch;
+    }).sort((a,b) => {
+        if(sortBy === 'date') {
+            return a.createdAt < b.createdAt ? 1 : -1 
+        } else if(sortBy === 'amount') {
+            return a.amount < b.amount ? 1 : -1
+        }
     });
 };
 
@@ -156,7 +162,7 @@ const expense3 = store.dispatch(addExpense({description: 'Reptile', amount: 20, 
 
 // store.dispatch(removeExpense({id: expense2.expense.id}));
 // store.dispatch(editExpense(expense1.expense.id, {amount: 50}));
-store.dispatch(setTextFilter('re'));
+// store.dispatch(setTextFilter('re'));
 // store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
 
@@ -179,14 +185,3 @@ const demoState = {
         endDate: undefined
     }
 };
-
-const user = {
-    name: 'Hari',
-    age: 24
-}
-
-console.log({
-    ...user,
-    location: 'Atlanta',
-    age: 23
-});
