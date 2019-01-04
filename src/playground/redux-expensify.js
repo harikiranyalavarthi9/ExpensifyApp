@@ -48,7 +48,7 @@ const setStartDate = (startDate = undefined) => ({
 const setEndDate = (endDate = undefined) => ({
     type: 'SET_END_DATE',
     endDate
-})
+});
 
 
 const expensesReducerDefaultState = [];
@@ -154,7 +154,7 @@ store.subscribe(() => {
     const state = store.getState();
     const visibleExpenses = getVisibileExpenses(state.expenses, state.filters);
     console.log(visibleExpenses);
-})
+});
 
 const expense1 = store.dispatch(addExpense({description: 'Rent', amount: 100, createdAt: 1000 }));
 const expense2 = store.dispatch(addExpense({description: 'Coffee', amount: 30, createdAt: -1000 }));
