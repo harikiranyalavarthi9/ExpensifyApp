@@ -1,3 +1,3 @@
-# IndecisionApp-React
+# ExpensifyApp-ReactRedux
 
 
