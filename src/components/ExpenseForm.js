@@ -7,13 +7,17 @@ const now = moment();
 console.log(now.format('MMM Do, YYYY'));
 
 class ExpenseForm extends React.Component {
-    state = {
-        description: '',
-        note: '',
-        amount: '',
-        createdAt: moment(),
-        calendarFocused: false
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            description: props.expense ? props.expense.description : '',
+            note: props.expense ? props.expense.note : '',
+            amount: props.expense ? (props.expense.amount / 100).toString() : '',
+            createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+            calendarFocused: false,
+            error: ''
+        };
+    }
     onDescriptionChange = (e) => {
         const description = e.target.value;
         this.setState(() => ({
@@ -28,7 +32,7 @@ class ExpenseForm extends React.Component {
     }
     onAmountChange = (e) => {
         const amount = e.target.value;
-        if(!amount || amount.match(/^\d{1,}(\.\d{0-2})?$/)) {
+        if(!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
             this.setState(() => ({
                 amount
             }));
@@ -80,7 +84,7 @@ class ExpenseForm extends React.Component {
                     <input
                         type="text"
                         placeholder="Amount"
-                        value={this.state.value}
+                        value={this.state.amount}
                         onChange={this.onAmountChange}
                     />
 
